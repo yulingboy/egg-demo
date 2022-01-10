@@ -18,10 +18,10 @@ module.exports = appInfo => {
 
 	config.security = {
 		csrf: {
-		  enable: false,
+			enable: false,
 		},
 		// domainWhiteList: [ 'http://localhost:7001' ],
-	  }
+	}
 
 	// 中间件
 	config.middleware = ['errorHandler'];
@@ -59,12 +59,27 @@ module.exports = appInfo => {
 	}
 	// mongoose 配置
 	config.mongoose = {
-		url: 'mongodb://47.98.179.228:27017/egg_x',
+		url: 'mongodb://47.98.179.228:27017/test',
 		options: {
 			// bufferMaxEntries: 0,
 			useUnifiedTopology: true,
-			useCreateIndex: true
+			useCreateIndex: true,
+			useFindAndModify:false,
+			auto_reconnect: true //自动重连
 		},
+	}
+	// bcrypt配置
+	config.bcrypt = {
+		saltRounds: 10 // default 10
+	}	
+	config.validate = {   // 配置参数校验器，基于parameter
+		convert: true,      // 对参数可以使用 convertType 规则进行类型转换
+		// validateRoot: false,   // 限制被验证值必须是一个对象。
+	};
+	config.jwt = {
+		secret: 'Great4-M',
+		enable: true, // default is false
+		match: '/jwt', // optional
 	}
 
 	// add your user config here
