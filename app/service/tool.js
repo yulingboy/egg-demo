@@ -54,10 +54,10 @@ class ToolService extends Service {
 		const email = res.email; // 接收者的邮箱
 		const subject = '激活邮件';
 		// const text = '这是一封测试邮件';
-		const text = '请在3天内激活<a href="http://localhost:3000/checkCode?_id='+ res._id +'&code='+ code + '">点击激活</a>'
-		// const html = '<h2>测试一下::</h2><a class="elem-a" href="https://baidu.com"><span class="content-elem-span">测试链接</span></a>';
+		const text = '测试'
+		const html = '<p>请在3天内激活<a href="http://localhost:7002/api/common/checkCode?_id='+ res._id +'&code='+ code + '">点击激活</a></p>';
 
-		const has_send = await this.service.tool.sendMail(email, subject, text);
+		const has_send = await this.service.tool.sendMail(email, subject, text,html);
 
 		if (has_send) {
 			console.log('发送成功')
@@ -69,6 +69,21 @@ class ToolService extends Service {
 		ctx.body = {
 			message: '发送失败',
 		};
+	}
+	// 校验验证码
+	async checkCode(payload) {
+		// 根据ID查询用户是否存在
+		const user = await this.ctx.service.user.findUser({ _id: payload._id })
+		if (!user) {
+			this.ctx.throw(404, '用户不存在');
+		}
+		// 判断条件是否符合
+		const isActive = moment().isSameOrBefore(moment(user.active_time));
+		if (user.code === payload.code && isActive) {
+			return this.ctx.response.sendRedirect("/");
+		} else {
+			throw(404,'已过期')
+		}
 	}
 
 }
