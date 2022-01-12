@@ -24,11 +24,9 @@ class UserController extends Controller {
 	async register() {
 		const { ctx, service } = this;
 		// 校验参数
-		// const errors = ctx.validate(this.UserCreateTransfer);
 		try {
 			ctx.validate(this.UserCreateTransfer);
 		} catch (err) {
-			console.log('123')
 			console.log(err)
 			const messageObj = err.errors[0];
 			throw({
@@ -42,7 +40,7 @@ class UserController extends Controller {
 		// 调用 service 进行业务处理
 		const res = await service.user.register(payload);
 		// 发送验证码
-		await service.tool.testEmail(res);
+		// await service.tool.testEmail(res);
 		// 设置响应内容和响应状态码
 		ctx.helper.success({ ctx, res });
 	}

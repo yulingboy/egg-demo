@@ -9,6 +9,11 @@ module.exports = {
 			type: "string",
 			description: "密码",
 			example:"123456"
+		},
+		email: {
+			type: "string",
+			description: "邮箱",
+			example:"yuling@qq.com"
 		}
 	}
 }

@@ -38,37 +38,22 @@ class ToolService extends Service {
 		}
 	}
 	// 组合邮件内容
-	async testEmail(res) {
-		console.log(res)
-		const ctx = this.ctx;
-		const { _id } = res;
-		let code = parseInt(Math.random() * 10000) // 随机验证码
-		let options = {
-			code,
-			active_time: moment(res.create_time).add(3, 'day').format('YYYY-MM-DD HH:mm:ss'),
-			islive: false
-		}
-		let resObj = await ctx.service.user.update(_id, options);
-		console.log(resObj,'qweqw')
+	async concatEmail(payload) {
+		const { ctx, service } = this;
 
-		const email = res.email; // 接收者的邮箱
+
+		const email = payload.email; // 接收者的邮箱
 		const subject = '激活邮件';
-		// const text = '这是一封测试邮件';
-		const text = '测试'
-		const html = '<p>请在3天内激活<a href="http://localhost:7002/api/common/checkCode?_id='+ res._id +'&code='+ code + '">点击激活</a></p>';
+		const text = '';
+		const html = payload.content;
 
-		const has_send = await this.service.tool.sendMail(email, subject, text,html);
+		const has_send = await service.email.sendMail(email, subject, text, html);
 
 		if (has_send) {
-			console.log('发送成功')
-			ctx.body = {
-				message: '发送成功',
-			};
-			return;
+			return ''
+		} else {
+			throw(500, '发送失败')
 		}
-		ctx.body = {
-			message: '发送失败',
-		};
 	}
 	// 校验验证码
 	async checkCode(payload) {
