@@ -11,7 +11,7 @@ class HomeController extends Controller {
   /**
       * @summary 接口的小标题信息
       * @description 接口的描述信息
-      * @router get /test
+      * @router get /
       * @request query string str 对参数str的描述
       * @response 200 testResponse ok
       */

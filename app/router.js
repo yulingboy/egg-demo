@@ -5,8 +5,8 @@
  */
 module.exports = app => {
   const { router, controller } = app;
-  router.redirect('/', '/swagger-ui.html', 302);
-  router.get('/test', controller.home.test);
+  router.redirect('/api', '/swagger-ui.html', 302);
+  router.get('/', controller.home.test);
   router.post('/api/user/register', controller.user.register);
   router.post('/api/user/login', controller.user.login);
   router.post('/api/email/sendEmail', controller.email.sendEmail);
