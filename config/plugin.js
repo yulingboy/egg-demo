@@ -2,27 +2,27 @@
 
 // swagger 文档配置
 exports.swaggerdoc = {
-	enable: true,
-	package: 'egg-swagger-doc-feat',
+  enable: true,
+  package: 'egg-swagger-doc-feat',
 };
-// mongoose 
+// mongoose
 exports.mongoose = {
-	enable: true,
-	package: 'egg-mongoose'
-}
+  enable: true,
+  package: 'egg-mongoose',
+};
 
 // bcrypt
 exports.bcrypt = {
-	enable: true,
-	package: 'egg-bcrypt'
-}
+  enable: true,
+  package: 'egg-bcrypt',
+};
 // validate
 exports.validate = {
-	enable: true,
-	package: 'egg-validate',
+  enable: true,
+  package: 'egg-validate',
 };
 // jwt
 exports.jwt = {
-	enable: true,
-	package: 'egg-jwt',
-}
+  enable: true,
+  package: 'egg-jwt',
+};
