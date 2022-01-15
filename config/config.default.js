@@ -77,9 +77,14 @@ module.exports = appInfo => {
     // validateRoot: false,   // 限制被验证值必须是一个对象。
   };
   config.jwt = {
-    secret: 'Great4-M',
-    enable: true, // default is false
-    match: '/jwt', // optional
+    secret: 'qwe',
+    // enable: true, // default is false
+    // match: '/jwt', // optional
+  };
+  config.multipart = {
+    mode: 'file',
+    fileSize: '50mb',
+    fileExtensions: ['.png', '.jpg'], // 扩展几种上传的文件格式
   };
 
   // add your user config here

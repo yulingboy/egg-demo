@@ -7,6 +7,7 @@
     "declarations": true
   },
   "dependencies": {
+    "await-stream-ready": "^1.0.1",
     "egg": "^2.15.1",
     "egg-bcrypt": "^1.1.0",
     "egg-jwt": "^3.1.7",
@@ -16,7 +17,8 @@
     "egg-swagger-doc-feat": "^2.2.14",
     "egg-validate": "^2.0.2",
     "moment": "^2.29.1",
-    "nodemailer": "^6.7.2"
+    "nodemailer": "^6.7.2",
+    "stream-wormhole": "^1.1.0"
   },
   "devDependencies": {
     "autod": "^3.0.1",

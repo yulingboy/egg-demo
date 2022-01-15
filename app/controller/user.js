@@ -2,9 +2,6 @@
 
 const Controller = require('egg').Controller;
 
-/**
- * @controller 用户模块
- */
 class UserController extends Controller {
   	constructor(ctx) {
     	super(ctx);
@@ -15,12 +12,7 @@ class UserController extends Controller {
       		password: { type: 'password', required: true, allowEmpty: false, min: 6 },
     	};
 	}
-    /**
-	 * @summary 注册
-	 * @description 注册用户
-	 * @router POST /api/user/register
-	 * @request body register *body
-	 */
+	// 注册
   	async register() {
     	const { ctx, service } = this;
     	// 校验参数
@@ -37,33 +29,21 @@ class UserController extends Controller {
     	const payload = ctx.request.body || {};
     	// 调用 service 进行业务处理
     	const res = await service.user.register(payload);
-    	// 发送验证码
-    	// await service.tool.testEmail(res);
     	// 设置响应内容和响应状态码
     	ctx.helper.success({ ctx, res });
 	}
-
-	/**
-	 * @summary 登录
-	 * @description 登录
-	 * @router POST /api/user/login
-	 * @request body login *body
-	 */
+	// 登录
 	async login() {
 		const { ctx, service } = this;
     	// 组装参数
+		console.log('qwe',ctx.request.body)
     	const payload = ctx.request.body || {};
     	// 调用 service 进行业务处理
     	const res = await service.user.login(payload);
     	// 设置响应内容和响应状态码
     	ctx.helper.success({ ctx, res });
 	}
-	/**
-	 * @summary 根据ID查询用户详情
-	 * @description 登录
-	 * @router GET /api/user
-	 * @request params string *id 用户ID
-	 */
+	// 根据ID查询用户
 	async show() {
 		const { ctx, service } = this;
     	// 组装参数
@@ -73,6 +53,13 @@ class UserController extends Controller {
     	// 设置响应内容和响应状态码
 		ctx.helper.success({ ctx, res });
 	}
+	// 获取当前用户信息
+	async current() {
+		const { ctx, service } = this;
+		const res = await service.user.current();
+		// 设置响应内容和响应状态码
+		ctx.helper.success({ ctx, res });
+	  }
 
 }
 

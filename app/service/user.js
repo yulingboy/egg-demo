@@ -17,6 +17,7 @@ class UserService extends Service {
   	// 登录
   	async login(payload) {
     	// 获取用户
+			console.log(payload)
     	const user = await this.ctx.service.user.findUser({ email: payload.email });
     	if (!user) {
       		this.ctx.throw(404, '用户不存在');
@@ -27,7 +28,8 @@ class UserService extends Service {
       		this.ctx.throw(404, '密码错误');
     	}
     	// 生成Token令牌
-    	const token = await this.ctx.service.actionToken.apply(user._id);
+			const token = await this.ctx.service.actionToken.apply(user._id);
+			console.log(token)
     	return {
       		token: token,
       		email: user.email,
@@ -40,7 +42,19 @@ class UserService extends Service {
   	// 根据修改用户信息
   	async update(id, payload) {
     	return this.ctx.model.User.findByIdAndUpdate({ _id: id }, payload, { $set: true });
-  	}
+	}
+	async current() {
+		const { ctx, service } = this;
+		console.log(ctx.state.user)
+    	// ctx.state.user 可以提取到JWT编码的data
+		const _id = ctx.state.user.data._id;
+		const user = await service.user.findUser({_id});
+    	if (!user) {
+			ctx.throw(404, 'user is not found');
+    	}
+		user.password = 'How old are you?';
+		return user;
+	}
 }
 
 module.exports = UserService;
