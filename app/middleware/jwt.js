@@ -1,14 +1,14 @@
 module.exports = (options, app) => {
 	return async function jwt(ctx, next) {
 		const token = ctx.request.header.authorization;
+		console.log(token)
 		let decode = '';
 		if (token) {
 			try {
-				console.log(options.secret)
+				console.log('321312')
 				// 解码token
-				console.log(ctx.app.jwt.verify)
-				console.log(token);
 				decode = ctx.app.jwt.verify(token, options.secret);
+				console.log(decode,'123123')
 				await next();
 			} catch (error) {
 				console.log(error)
