@@ -26,3 +26,7 @@ exports.jwt = {
   enable: true,
   package: 'egg-jwt',
 };
+exports.rbac = {
+	enable: true,
+	package: 'egg-rbac-plugin',
+  };

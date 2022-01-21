@@ -8,6 +8,7 @@ module.exports = app => {
 	const jwt = app.middleware.jwt(app.config.jwt);
 	router.redirect('/api', '/swagger-ui.html', 302);
 	router.get('/', controller.home.test);
+	
 	router.post('/api/common/register', controller.user.register);
 	router.post('/api/common/login', controller.user.login);
 	router.get('/api/common/current', app.jwt, controller.user.current);
@@ -28,4 +29,10 @@ module.exports = app => {
 	router.get('/api/roles/:id', controller.role.show);
 	router.get('/api/roles/:size/:current', controller.role.index);
 	router.get('/api/roles', controller.role.list);
+
+
+	router.post('/api/routes', controller.adminRoute.create);
+
+	router.get('/api/wp/access', controller.adminWp.access)
+	router.get('/api/wp/accessCallBack',controller.adminWp.accessCallBack)
 };

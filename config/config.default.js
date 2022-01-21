@@ -86,6 +86,29 @@ module.exports = appInfo => {
     fileSize: '50mb',
     fileExtensions: ['.png', '.jpg'], // 扩展几种上传的文件格式
   };
+	config.wp = {
+		AppID: 25537918,
+		Appkey: 'K5uoaiyuoKNoOmZIQcFcyRUO7fd7X7N8',
+		Secretkey: 'cD5Hux0TmIwj7ACDuPCZkPjWOnrm7Ygk',
+		Signkey: 'A~VzdV=RkDvqBcFQL@mE^$*RmL4tB*Cc',
+		redirect_uri: 'http://q35403b104.zicp.vip/api/wp/accessCallBack'
+	};
+	config.qiqiu = {
+		AccessKey: 'QcvEsBcoFGPuz8OZrIEMNZ36yRhp_U_tvS5y2Lny',
+		SecretKey: 'mx3PzQH2BT1JOM4D5LHT1x8ndNY4Tmc6u22GNS_3'
+	};
+	config.rbac = {
+		initOnStart: true, // default false
+		multipleConnect: false, // 是否是多数据库连接方式
+		dbName: '', // 如果是多数据库连接方式，则指明哪个是希望rbac使用的数据库
+		/**
+		 * @param {object} ctx - egg context object
+		 * @return {object} promise, if resolve data is falsy, no role
+		 */
+		async getGroupName(ctx) { // eslint-disable-line
+		  return Promise.resolve('');
+		}
+	  };
 
   // add your user config here
   const userConfig = {
